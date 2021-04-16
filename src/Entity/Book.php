@@ -37,6 +37,12 @@ class Book
      */
     private $firstRelease;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Audience::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idAudience;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Book
     public function setFirstRelease(\DateTimeInterface $firstRelease): self
     {
         $this->firstRelease = $firstRelease;
+
+        return $this;
+    }
+
+    public function getIdAudience(): ?Audience
+    {
+        return $this->idAudience;
+    }
+
+    public function setIdAudience(?Audience $idAudience): self
+    {
+        $this->idAudience = $idAudience;
 
         return $this;
     }
