@@ -34,8 +34,49 @@
 </head>
 
     <body>
+    <div id="wrapper">
+    <header>
+      <!-- Navbar
+    ================================================== -->
+      <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- logo -->
+            <div class="logo">
+              <a href="{{path('home')}}"><img src="assets/img/logo.png" alt="" /></a>
+            </div>
+            <!-- end logo -->
+
+            <!-- top menu -->
+            <div class="navigation">
+              <nav>
+                <ul class="nav topnav">
+                  <li class="active">
+                    <a href="{{path('home')}}"><i class="icon-home"></i> Home </a>
+                  </li>
+                  <li>
+                    <a href="{{path('profil')}}"><i class="icon-user"></i> Profil </a>
+                  </li>
+                  <li>
+                    <a href="{{path('livres')}}"><i class="icon-book"></i> Livres </a>
+                  </li>
+                  <li>
+                    <a href="{{path('connexion')}}"><i class="icon-cog"></i> Connexion </a>
+                  </li>
+                  {# <li>
+                    <a href="contact.html"><i class="icon-envelope-alt"></i> Contact</a>
+                  </li> #}
+                </ul>
+              </nav>
+            </div>
+            <!-- end menu -->
+
+          </div>
+        </div>
+      </div>
+    </header>
         {% block body %}{% endblock %}
-        
+  </div>
         {% block javascript %}
           <script src="{{ asset('assets/js/jquery.js')}}"></script>
           <script src="{{ asset('assets/js/raphael-min.js')}}"></script>

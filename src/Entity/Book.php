@@ -12,6 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+
+    public function hydrate(array $init)
+    {
+        foreach ($init as $key => $value) {
+            $method = "set" . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -35,15 +45,22 @@ class Book
     private $summary;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\ManyToOne(targetEntity=Audience::class)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $idAudience;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
      */
     private $firstRelease;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Audience::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idAudience;
+    public function __construct($arrayInit = [])
+    {
+        $this->exemplaires = new ArrayCollection();
+        // appel au hydrate
+        $this->hydrate($arrayInit);
+    }
 
     public function getId(): ?int
     {
@@ -86,18 +103,6 @@ class Book
         return $this;
     }
 
-    public function getFirstRelease(): ?\DateTimeInterface
-    {
-        return $this->firstRelease;
-    }
-
-    public function setFirstRelease(\DateTimeInterface $firstRelease): self
-    {
-        $this->firstRelease = $firstRelease;
-
-        return $this;
-    }
-
     public function getIdAudience(): ?Audience
     {
         return $this->idAudience;
@@ -106,6 +111,18 @@ class Book
     public function setIdAudience(?Audience $idAudience): self
     {
         $this->idAudience = $idAudience;
+
+        return $this;
+    }
+
+    public function getFirstRelease(): ?\DateTimeInterface
+    {
+        return $this->firstRelease;
+    }
+
+    public function setFirstRelease(?\DateTimeInterface $firstRelease): self
+    {
+        $this->firstRelease = $firstRelease;
 
         return $this;
     }
