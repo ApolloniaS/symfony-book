@@ -19,6 +19,19 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function testjoin($id)
+{
+    $qb = $this->createQueryBuilder('b'); 
+    $query = $qb->select('b')
+        ->where('b.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery();
+    $res = $query->getResult();
+    //var_dump ($res);
+
+    return $res;
+}
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

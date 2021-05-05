@@ -2,23 +2,22 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Book;
+use App\Entity\Author;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 
-class BookFixture extends Fixture
+class AuthorFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create();
         for ($i = 0; $i < 25 ; $i++){
-            $book = new Book([
-                'title' => $faker->realText(25),
-                'summary'=>$faker->realText(200),
-                'firstRelease'=>$faker->dateTime, 
+            $author = new Author([
+                'lastName' => $faker->lastName,
+                'firstName'=>$faker->firstName,
             ]);
-            $manager->persist($book);
+            $manager->persist($author);
             }
         $manager->flush();
     }
