@@ -3,23 +3,45 @@
 {% block body %}
 <section id="intro">
       <div class="container">
-
-test affichage d'un livre
+          >> Un livre au hasard :) !
           <div class="row">
           <div class="span12">
-            <div class="call-action">
-
+            <div class="call-action" style="text-align: center; vertical-align: middle; display: table-cell;">
+              {# TODO Il faudrait ici mettre la balise style dans la css, mais ça ne fonctionne pas !!  #}
+              <img src="{{ asset('assets/img/custo/'~ unLivre.picture ~'')}}" alt=""/>
               <div class="text">
-                <h2>{{unLivre.title}}</h2>
+                <div><h2>{{unLivre.title}}, par {{unAuteur.firstName}} {{unAuteur.lastName}}</h2></div>
                 <p>
-                  {{unLivre.summary}}
+                  Résumé: {{unLivre.summary}}
                 </p>
               </div>
             </div>
-            <!-- end tagline -->
           </div>
         </div>
-      
+      </div>
 </section>
+
+<section class="maincontent">
+  <div class="container">
+        >> Avis récemment postés<br/>
+        <div class="row">
+          {% for i in range(0,3) %}
+          <div class="span3 features e_pulse">
+            <img src="assets/img/dummies/img1.jpg" alt="" />
+            <div class="box">
+              <div class="divcenter">
+              <i>Titredulivre</i><br/>
+                Le 17/02/2020, Dao a écrit:<br/>
+                "Super livre !"<br/><br/>
+                <a href="#" class="btn btn-theme">Voir la fiche du livre</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+  </diV>
+</section>
+      
 {% endblock %}
 
