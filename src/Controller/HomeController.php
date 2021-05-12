@@ -24,21 +24,9 @@ class HomeController extends AbstractController
         $repAuteur = $em->getRepository(Author::class);
         $auteur = $repAuteur->findAll();
         
-        /* $repReview = $em->getRepository(Review::class);
-        $review = $repReview->findAll(); */
-
         $em = $this->getDoctrine()->getManager();
         $reviewRepo = $em->getRepository(Review::class);
         $review = $reviewRepo->getLatestReviews();
-        
-        //test querybuilder
-        /* $id = rand(0,25);    
-        $em = $this->getDoctrine()->getManager();
-        $livresRepo = $em->getRepository(Book::class);
-        $livres = $livresRepo->getOneBookRandomly($id);
-        $vars = ['unLivre' => $livres];
-        // attention ! retour array !
-        dd($livres); */
         
         $vars = ['unLivre' => $livre,
                 'unAuteur' => $auteur,
