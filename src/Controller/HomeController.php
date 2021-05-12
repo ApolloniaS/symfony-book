@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\Review;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,19 +18,21 @@ class HomeController extends AbstractController
         //test requête doctrine simple
         $em = $this->getDoctrine()->getManager();
         $repLivre = $em->getRepository(Book::class);
-        $livre = $repLivre->findOneBy(['id' => rand(0,25)]); //critère à changer
+        $livre = $repLivre->findAll(); 
         //dd($livre);
 
         $repAuteur = $em->getRepository(Author::class);
-        $auteur = $repAuteur->findOneBy(['id' => rand(0,25)]);
-        $vars = ['unLivre' => $livre,
-                'unAuteur' => $auteur];
-        //dd($vars);
-        // todo: idéalement, il faudrait join les tables book et author via BookAuthor
+        $auteur = $repAuteur->findAll();
+        
+        /* $repReview = $em->getRepository(Review::class);
+        $review = $repReview->findAll(); */
+
+        $em = $this->getDoctrine()->getManager();
+        $reviewRepo = $em->getRepository(Review::class);
+        $review = $reviewRepo->getLatestReviews();
         
         //test querybuilder
-        /* $id = rand(0,25);
-            
+        /* $id = rand(0,25);    
         $em = $this->getDoctrine()->getManager();
         $livresRepo = $em->getRepository(Book::class);
         $livres = $livresRepo->getOneBookRandomly($id);
@@ -37,6 +40,12 @@ class HomeController extends AbstractController
         // attention ! retour array !
         dd($livres); */
         
+        $vars = ['unLivre' => $livre,
+                'unAuteur' => $auteur,
+                'unAvis' => $review];
+        //dd($vars);
+        // todo: idéalement, il faudrait join les tables book et author via BookAuthor
+
         return $this->render("home/index.html.twig", $vars);
     }
 }

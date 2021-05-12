@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReviewRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Review
 {
+    public function hydrate(array $init)
+    {
+        foreach ($init as $key => $value) {
+            $method = "set" . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,15 +44,22 @@ class Review
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idUser;
 
     /**
      * @ORM\ManyToOne(targetEntity=Book::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idBook;
+
+    public function __construct($arrayInit = [])
+    {
+        $this->exemplaires = new ArrayCollection();
+        // appel au hydrate
+        $this->hydrate($arrayInit);
+    }
 
     public function getId(): ?int
     {
