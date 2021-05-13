@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
+{% block title %}Connexion{% endblock %}
 {% block body %}
+Pas encore de compte ? <a href="{{path('app_register')}}">Inscrivez-vous !</a>
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ "Votre nom d'utilisateur ou votre mot de passe est incorrect.<br/>Veuillez réessayer." }}</div>
@@ -14,10 +14,10 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputLogin">Login</label>
+    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+    <label for="inputLogin">Login&nbsp;:</label>
     <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Mot de passe&nbsp;:</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
@@ -35,8 +35,8 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-theme" type="submit">
+        Se connecter
     </button>
 </form>
 {% endblock %}

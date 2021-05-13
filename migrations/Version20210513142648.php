@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210512143123 extends AbstractMigration
+final class Version20210513142648 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -27,7 +27,7 @@ final class Version20210512143123 extends AbstractMigration
         $this->addSql('CREATE TABLE book_category (id INT AUTO_INCREMENT NOT NULL, id_book_id INT NOT NULL, id_category_id INT NOT NULL, INDEX IDX_1FB30F98C83F1AF1 (id_book_id), INDEX IDX_1FB30F98A545015 (id_category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, category_name VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE review (id INT AUTO_INCREMENT NOT NULL, id_user_id INT DEFAULT NULL, id_book_id INT DEFAULT NULL, review_date DATE NOT NULL, review_content VARCHAR(255) NOT NULL, review_score DOUBLE PRECISION NOT NULL, INDEX IDX_794381C679F37AE5 (id_user_id), INDEX IDX_794381C6C83F1AF1 (id_book_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, login VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, first_name VARCHAR(50) NOT NULL, last_name VARCHAR(50) NOT NULL, email VARCHAR(323) NOT NULL, is_admin TINYINT(1) NOT NULL, birthdate DATE NOT NULL, avatar VARCHAR(100) DEFAULT NULL, UNIQUE INDEX UNIQ_8D93D649AA08CB10 (login), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, login VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, first_name VARCHAR(50) NOT NULL, last_name VARCHAR(50) NOT NULL, email VARCHAR(323) NOT NULL, is_admin TINYINT(1) DEFAULT NULL, birthdate DATE NOT NULL, avatar VARCHAR(100) DEFAULT NULL, UNIQUE INDEX UNIQ_8D93D649AA08CB10 (login), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user_book (id INT AUTO_INCREMENT NOT NULL, id_user_id INT NOT NULL, id_book_id INT NOT NULL, reading_status VARCHAR(50) NOT NULL, INDEX IDX_B164EFF879F37AE5 (id_user_id), INDEX IDX_B164EFF8C83F1AF1 (id_book_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A3319C9E0BE1 FOREIGN KEY (id_audience_id) REFERENCES audience (id)');
         $this->addSql('ALTER TABLE book_author ADD CONSTRAINT FK_9478D34576404F3C FOREIGN KEY (id_author_id) REFERENCES author (id)');
