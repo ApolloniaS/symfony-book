@@ -1,20 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LivresController!{% endblock %}
+{% block title %}Tous les livres{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/XAMPP/htdocs/projet-symfony1/projet_book/src/Controller/LivresController.php'|file_link(0) }}">src/Controller/LivresController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/XAMPP/htdocs/projet-symfony1/projet_book/templates/livres/index.html.twig'|file_link(0) }}">templates/livres/index.html.twig</a></code></li>
-    </ul>
-</div>
+<section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="{{path('home')}}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li>Livres
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+    {% for livre in livres%}
+      <div class="container">  
+    <h2>{{livre.title}}</h2>
+        <div class="row">
+          <div class="span6">
+            <!-- start: Accordion -->
+            <div class="accordion" id="accordion2">
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+							<i class="icon-minus"></i>Résumé</a>
+                </div>
+                <div id="collapseOne" class="accordion-body collapse in">
+                  <div class="accordion-inner">
+                    {{livre.summary}}
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+							<i class="icon-plus"></i> Infos supplémentaires</a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    [En construction]
+                    Auteur / Genre / Public / Note moyenne
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+							<i class="icon-plus"></i> Ce livre et vous</a>
+                </div>
+                <div id="collapseThree" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                     <a href="#" class="btn btn-theme">J'aimerais le lire</a>
+                     <a href="#" class="btn btn-theme">Je le lis</a>
+                     <a href="#" class="btn btn-theme">Je l'ai lu</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end: Accordion -->
+          </div>
+          <div class="span6">
+            <div class="centered">
+              <img src="{{ asset('assets/img/custo/'~ livre.picture ~'')}}" alt="" />
+            </div>
+          </div>
+        </div>
+{% endfor %}
+        </section>
 {% endblock %}
