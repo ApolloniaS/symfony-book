@@ -2,18 +2,33 @@
 
 {% block title %}Connexion{% endblock %}
 {% block body %}
-Pas encore de compte ? <a href="{{path('app_register')}}">Inscrivez-vous !</a>
+<section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="{{path('home')}}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li>Connexion
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<div class="container">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ "Votre nom d'utilisateur ou votre mot de passe est incorrect.<br/>Veuillez réessayer." }}</div>
-    {% endif %}
+    {% endif %} 
 
-    {% if app.user %}
-        <div class="mb-3">
-            Succès de la connexion pour l'utilisateur {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
+    Pas encore de compte ? <a href="{{path('app_register')}}">Inscrivez-vous !</a>
     <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
     <label for="inputLogin">Login&nbsp;:</label>
     <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus>
@@ -39,4 +54,5 @@ Pas encore de compte ? <a href="{{path('app_register')}}">Inscrivez-vous !</a>
         Se connecter
     </button>
 </form>
+</div>
 {% endblock %}

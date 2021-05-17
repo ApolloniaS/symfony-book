@@ -33,10 +33,10 @@
             <div class="accordion" id="accordion2">
               <div class="accordion-group">
                 <div class="accordion-heading">
-                  <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  <a class="accordion-toggle">
 							<i class="icon-minus"></i>Résumé</a>
                 </div>
-                <div id="collapseOne" class="accordion-body collapse in">
+                <div id="collapseOne">
                   <div class="accordion-inner">
                     {{livre.summary}}
                   </div>
@@ -44,22 +44,24 @@
               </div>
               <div class="accordion-group">
                 <div class="accordion-heading">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-							<i class="icon-plus"></i> Infos supplémentaires</a>
+                  <a class="accordion-toggle">
+							<i class="icon-minus"></i> Infos supplémentaires</a>
                 </div>
-                <div id="collapseTwo" class="accordion-body collapse">
+                <div id="collapseTwo">
                   <div class="accordion-inner">
-                    [En construction]
-                    Auteur / Genre / Public / Note moyenne
+                    Auteur: {{auteurs[random(0,24)].firstName}} {{auteurs[random(0,24)].lastName}}<br/>
+                    Genre: {{categories[random(0,24)].categoryName}}<br/>
+                    Public: {{audience[random(0,24)].audienceGroup}}<br/>
+                    Note moyenne: {{reviews[random(0,24)].reviewScore}}/5
                   </div>
                 </div>
               </div>
               <div class="accordion-group">
                 <div class="accordion-heading">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-							<i class="icon-plus"></i> Ce livre et vous</a>
+                  <a class="accordion-toggle">
+							<i class="icon-minus"></i> Ce livre et vous</a>
                 </div>
-                <div id="collapseThree" class="accordion-body collapse">
+                <div id="collapseThree">
                   <div class="accordion-inner">
                      <a href="#" class="btn btn-theme">J'aimerais le lire</a>
                      <a href="#" class="btn btn-theme">Je le lis</a>

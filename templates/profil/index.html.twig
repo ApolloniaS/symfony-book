@@ -3,7 +3,6 @@
 {% block title %}Hello ProfilController!{% endblock %}
 
 {% block body %}
-    {% if app.user != null %}
     <section id="subintro">
       <div class="container">
         <div class="row">
@@ -79,8 +78,4 @@
       </div>
     </section>
 </div>
-    {% else %}
-    Connectez-vous pour accéder à vos infos de profil
-    {# TODO: redirection directement vers la page de login #}
-    {% endif %}
 {% endblock %}

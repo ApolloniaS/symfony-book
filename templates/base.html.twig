@@ -61,7 +61,11 @@
                     <a href="{{path('livres')}}"><i class="icon-book"></i> Livres </a>
                   </li>
                   <li>
-                    <a href="{{path('app_login')}}"><i class="icon-cog"></i> Connexion </a>
+                    {% if app.user == null %} 
+                    <a href="{{path('app_login')}}"><i class="icon-cog"></i>Connexion</a>
+                    {% else %}
+                    <a href="{{path('app_logout')}}"><i class="icon-cog"></i>Déconnexion</a>
+                    {% endif %}
                   </li>
                   <li>
                     <a href="contact.html"><i class="icon-envelope-alt"></i> Contact</a>
