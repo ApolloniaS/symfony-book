@@ -58,4 +58,50 @@ class LivresController extends AbstractController
 
     }
 
+    #[Route('/livres/submit/{id}', name: 'submitReview')]
+    public function submitReview(Request $req){
+
+        $idLivre = $req->get('id');
+        $score = $req->request->get('score');
+        $avis = $req->request->get('message');
+        $today = new \DateTime();
+
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $repBook = $em->getRepository(Book::class);
+        $book = $repBook->findOneBy(array("id" =>$idLivre));
+
+        //enregistrement dans la db
+        $review = new Review();
+        $review->setIdUser($user);
+        $review->setIdBook($book);
+        $review->setReviewDate($today);
+        $review->setReviewContent($avis);
+        $review->setReviewScore($score);
+        $em->persist($review);
+        $em->flush(); 
+
+        return $this->redirectToRoute('home');
+    }
+
+    #[Route('/livres/read/{id}', name: 'readReview')]
+    public function readReview(Request $req){
+
+        $idLivre = $req->get('id');
+        
+        $em = $this->getDoctrine()->getManager();
+        $repReview = $em->getRepository(Review::class);
+        $review = $repReview->findBy(['idBook' => $idLivre]);
+
+        $repLivre = $em->getRepository(Book::class);
+        $livre = $repLivre->findOneBy(['id' => $idLivre]);
+        
+
+        $vars = ['avis' => $review,
+                'livre' => $livre];
+
+        return $this->render("livres/allreviews.html.twig", $vars);
+    
+    }
+
 }

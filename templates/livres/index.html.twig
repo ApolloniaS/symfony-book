@@ -66,7 +66,7 @@
                      <a href="{{path('updateProfil', {id: livre.id, status: 'À lire'})}}" class="btn btn-theme"><i class="icon-heart"></i>J'aimerais le lire</a>
                      <a href="{{path('updateProfil', {id: livre.id, status: 'En cours'})}}" class="btn btn-theme"><i class="icon-star"></i>Je le lis</a>
                      <a href="{{path('updateProfil', {id: livre.id, status: 'Lu'})}}" class="btn btn-theme"><i class="icon-check"></i>Je l'ai lu</a><br/></br>
-                     <a href="{{path('writeReview', {id: livre.id})}}" class="btn btn-theme btn-large"><i class=" icon-align-justify"></i>Donnez votre avis !</a>
+                     <a href="{{path('writeReview', {id: livre.id})}}" class="btn btn-theme btn-large"><i class="icon-edit"></i>Donnez votre avis !</a>
                   </div>
                 </div>
               </div>
@@ -75,7 +75,9 @@
           </div>
           <div class="span6">
             <div class="centered">
-              <img src="{{ asset('assets/img/custo/'~ livre.picture ~'')}}" alt="" />
+              <img style="box-shadow: 10px 5px 5px lightgrey;" src="{{ asset('assets/img/custo/'~ livre.picture ~'')}}" alt="" /></br></br>
+              <a href="{{path('readReview', {id: livre.id})}}" class="btn btn-theme btn-large"><i class=" icon-align-justify"></i>Lire tous les avis !</a>
+              
             </div>
           </div>
         </div>

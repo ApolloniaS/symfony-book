@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les avis{% endblock %}
+
+{% block body %}
+<section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="{{path('home')}}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="{{path('livres')}}">Livres</a>
+              <i class="icon-angle-right"></i>Les avis sur "{{livre.title}}"
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+    </section>
+{% endblock %}

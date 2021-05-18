@@ -48,14 +48,14 @@
             </aside>
           </div>
           <div class="span8">
-            <form action="" method="post" role="form" class="contactForm">
+            <form action="{{path('submitReview', {id: leLivre.id})}}" method="post" role="form" class="contactForm">
               <div class="row">
                 <div class="span4 form-group">
                   <input type="number" min="0" max="5" name="score" class="input-block-level" id="score" placeholder="Score"/>
                   <div class="validation"></div>
                 </div>
                 <div class="span8 form-group">
-                  <textarea class="input-block-level" name="message" rows="5" data-rule="required" data-msg="Entrez votre avis" placeholder="Votre avis"></textarea>
+                  <textarea class="input-block-level" maxlength="500" name="message" rows="5" data-rule="required" data-msg="Entrez votre avis" placeholder="Votre avis"></textarea>
                   <div class="validation"></div>
                   <div class="text-center">
                     <button class="btn btn-theme" type="submit">Je valide !</button>
