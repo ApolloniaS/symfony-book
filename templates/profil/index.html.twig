@@ -49,31 +49,31 @@
                     <div class="tab-pane active" id="one">
                       <p>
                         <strong>Retrouvez ici l'ensemble des livres que vous planifiez de dévorer un jour !</strong></br>
-                        {% if toAdd is defined and toAdd[1] == "À lire" %}
-                          {{toAdd[0]}}
-                        {% else %}
-                          Vous n'avez encore ajouté aucun livre dans cette section :(
-                        {% endif %}
+                        {% for item in infosUserBook %}
+                          {% if item.readingStatus == "À lire" %}
+                            <i class="icon-angle-right"></i>{{item.idBook.title}}</br>
+                          {% endif %}
+                        {% endfor %}
                       </p>
                     </div>
                     <div class="tab-pane" id="two">
                       <p>
                         <strong>Retrouvez ici les livres que vous lisez actuellement.</strong></br>
-                        {% if toAdd is defined and toAdd[1] == "En cours" %}
-                          {{toAdd[0]}}
-                        {% else %}
-                          Vous n'avez encore ajouté aucun livre dans cette section :(
-                        {% endif %}
+                        {% for item in infosUserBook %}
+                          {% if item.readingStatus == "En cours" %}
+                            <i class="icon-angle-right"></i>{{item.idBook.title}}</br>
+                          {% endif %}
+                        {% endfor %}
                       </p>
                     </div>
                     <div class="tab-pane" id="three">
                       <p>
                         <strong>Retrouvez ici l'ensemble des livres que vous avez déjà lus.</strong></br>
-                        {% if toAdd is defined and toAdd[1] == "Lu" %}
-                          {{toAdd[0]}}
-                        {% else %}
-                          Vous n'avez encore ajouté aucun livre dans cette section :(
-                        {% endif %}
+                        {% for item in infosUserBook %}
+                          {% if item.readingStatus == "Lu" %}
+                            <i class="icon-angle-right"></i>{{item.idBook.title}}</br>
+                          {% endif %}
+                        {% endfor %}
                       </p>
                     </div>
                   </div>

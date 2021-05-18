@@ -63,9 +63,9 @@
                 </div>
                 <div id="collapseThree">
                   <div class="accordion-inner">
-                     <a href="{{path('updateProfil', {id: livre.id, titre: livre.title, status: 'À lire'})}}" class="btn btn-theme">J'aimerais le lire</a>
-                     <a href="{{path('updateProfil', {id: livre.id, titre: livre.title, status: 'En cours'})}}" class="btn btn-theme">Je le lis</a>
-                     <a href="{{path('updateProfil', {id: livre.id, titre: livre.title, status: 'Lu'})}}" class="btn btn-theme">Je l'ai lu</a>
+                     <a href="{{path('updateProfil', {id: livre.id, status: 'À lire'})}}" class="btn btn-theme">J'aimerais le lire</a>
+                     <a href="{{path('updateProfil', {id: livre.id, status: 'En cours'})}}" class="btn btn-theme">Je le lis</a>
+                     <a href="{{path('updateProfil', {id: livre.id, status: 'Lu'})}}" class="btn btn-theme">Je l'ai lu</a>
                   </div>
                 </div>
               </div>

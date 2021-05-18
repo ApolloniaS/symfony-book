@@ -22,17 +22,21 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         else
-        return $this->render('profil/index.html.twig', [
-            'controller_name' => 'ProfilController',
-        ]);
+
+        $em = $this->getDoctrine()->getManager();
+        $rUb = $em->getRepository(UserBook::class);
+        $ub = $rUb->findAll();
+    
+        $vars = ['infosUserBook' => $ub];
+
+        return $this->render('profil/index.html.twig', $vars);
     }
 
-    #[Route('/profil/{id}/{titre}/{status}', name: 'updateProfil')]
+    #[Route('/profil/{id}/{status}', name: 'updateProfil')]
     public function addStatus(Request $req)
     {
         
     $idLivre = $req->get("id");
-    $titreLivre = $req->get("titre");
     $statutLivre = $req->get("status");
 
     $user = $this->getUser();
@@ -47,8 +51,8 @@ class ProfilController extends AbstractController
     $userBook->setIdBook($book);
     $em->persist($userBook);
     $em->flush();
+
     
-    $vars = ['toAdd' => [$titreLivre, $statutLivre]];
-    return $this->render('profil/index.html.twig', $vars);
+    return $this->render('profil/index.html.twig');
     }
 }
