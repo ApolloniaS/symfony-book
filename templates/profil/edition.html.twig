@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer votre profil{% endblock %}
+
+{% block body %}
+    <section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="{{path('home')}}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="{{path('profil')}}">Profil</a><i class="icon-angle-right"></i>Édition
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+      <div class="container">
+      <div class="span8">
+            <h2>Modifier les informations du profil:</h2></br>
+            <form action="{{path('confirmation_edition')}}" method="post" role="form" class="contactForm">
+              <div class="row">
+                <div class="span4 form-group">
+                  Login: <input type="text" name="login" class="input-block-level" id="login" placeholder="Login"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="span4 form-group">
+                  Prénom: <input type="text" name="firstName" class="input-block-level" id="firstName" placeholder="Prénom"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="span4 form-group">
+                  Nom: <input type="text" name="lastName" class="input-block-level" id="lastName" placeholder="Nom"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="span4 form-group">
+                  Mail: <input type="text" name="email" class="input-block-level" id="email" placeholder="Email"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="span4 form-group">
+                  Date de naissance: <input type="date" name="birthdate" class="input-block-level" id="birthdate" placeholder="Date de naissance"/>
+                  <div class="validation"></div>
+                </div>
+                  <div class="text-center">
+                    <button class="btn btn-theme" type="submit">Modifier</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </section>
+{% endblock %}

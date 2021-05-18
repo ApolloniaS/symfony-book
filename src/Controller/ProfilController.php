@@ -68,4 +68,37 @@ class ProfilController extends AbstractController
     return $this->render('profil/index.html.twig', $vars);
     }
     }
+
+    #[Route('/profil/edition', name: 'edition')]
+    public function editProfile(): Response
+    {
+        
+        return $this->render('profil/edition.html.twig');
+    }
+
+    #[Route('/profil/confirmer_edition', name: 'confirmation_edition')]
+    public function confirmEdit(Request $req): Response
+    {
+        $user = $this->getUser();
+        $login = $req->request->get('login');
+        $firstName = $req->request->get('firstName');
+        $lastName = $req->request->get('lastName');
+        $email = $req->request->get('email');
+        $birthday = $req->request->get('birthdate');
+        //dd([$user, $login, $firstName, $lastName, $email, $birthday]);
+
+        $em = $this->getDoctrine()->getManager();
+        $repUser = $em->getRepository(User::class);
+        $userToChange = $repUser->findOneBy(['id' => $user]);
+        
+        $userToChange->setLogin($login);
+        $userToChange->setFirstName($firstName);
+        $userToChange->setLastName($lastName);
+        $userToChange->setEmail($email);
+        //$userToChange->setBirthdate($birthday);
+        //todo: check prob de typage
+        $em->flush();
+        
+        return $this->redirectToRoute('profil');
+    }
 }

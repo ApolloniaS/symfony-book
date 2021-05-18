@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -37,7 +38,7 @@ class RegistrationFormType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('email')
-            ->add('birthdate')
+            ->add('birthdate', DateType::class, ['widget' => 'single_text'])
         ;
     }
 
