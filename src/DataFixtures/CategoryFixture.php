@@ -14,11 +14,10 @@ class CategoryFixture extends Fixture
         $genres = ['poésie', 'historique', 'amour', 'nouvelle', 'histoire vraie', 'aventure',
                     'policier', 'thriller', 'science-fiction', 'heroic fantansy', 'horreur',
                     'biographie', 'théâtre', 'bd'];
-        $idGenre = count($genres);
 
-                for ($i = 0; $i < 25 ; $i++){
+                for ($i = 0; $i < count($genres) ; $i++){
                     $category = new Category([
-                        'categoryName' => $genres[rand(0, ($idGenre - 1))],
+                        'categoryName' => $genres[$i],
                     ]);
                     $manager->persist($category);
                     }

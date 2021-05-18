@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+{% set rand = random(24) %}
 <section id="intro">
       <div class="container">
           <h4 class="rheading">Un livre au hasard<span></span></h4>
@@ -8,11 +9,11 @@
           <div class="span12">
             <div class="call-action" style="text-align: center; vertical-align: middle; display: table-cell;">
               {# TODO Il faudrait ici mettre la balise style dans la css, mais ça ne fonctionne pas !!  #}
-              <img src="{{ asset('assets/img/custo/'~ unLivre[random(24)].picture ~'')}}" alt=""/>
+              <img src="{{ asset('assets/img/custo/'~ auteurEtLivre[rand].idBook.picture ~'')}}" alt=""/>
               <div class="text">
-                <div><h2>{{unLivre[random(24)].title}}, par {{unAuteur[random(24)].firstName}} {{unAuteur[random(24)].lastName}}</h2></div>
+                <div><h2>{{auteurEtLivre[rand].idBook.title}}, par {{auteurEtLivre[rand].idAuthor.firstName}} {{auteurEtLivre[rand].idAuthor.lastName}}</h2></div>
                 <p>
-                  Résumé: {{unLivre[random(24)].summary}}
+                  Résumé: {{auteurEtLivre[rand].idBook.summary}}
                 </p>
               </div>
             </div>
@@ -43,8 +44,8 @@
             <div class="box">
               <div class="divcenter">
               <br/>
-              <b><i>{{unLivre[random(24)].title}}</i></b><br/></br>
-                Le {{unAvis[i].reviewDate |date('d/m/Y')}}, <br/>Dao a donné son avis sur ce livre: 
+              <b><i>{{unAvis[i].idBook.title}}</i></b><br/></br>
+                Le {{unAvis[i].reviewDate |date('d/m/Y')}}, <br/>{{unAvis[i].idUser.login}} a donné son avis sur ce livre: 
                 <blockquote><p><i class="icon-quote-left"></i>{{unAvis[i].reviewContent}}</p></blockquote>
                 <a href="#" class="btn btn-theme">Voir la fiche du livre</a>
               </div>

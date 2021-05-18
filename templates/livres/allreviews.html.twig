@@ -27,16 +27,22 @@
     <section id="maincontent">
         <div class="container">
             <div class="row">
-            {% for unAvis in avis %}
-                <div class="span6">
-                    <h4 class="rheading">[Note: {{unAvis.reviewScore}}/5] Le {{unAvis.reviewDate |date('d/m/Y')}}, Dao a écrit<span></span></h4>
-                    <blockquote>
-                    <p>
-                        <i class="icon-quote-left"></i>{{unAvis.reviewContent}}
-                    </p>
-                    </blockquote>
-                </div>
-            {% endfor %}
+            {% if avis == null %}
+              <div>Aucun avis n'a encore été écrit :(</br>
+              Revenez plus tard, et n'hésitez pas à en ajouter un si vous avez lu ce livre !
+              </div>
+              {% else %}
+              {% for unAvis in avis %}
+                  <div class="span6">
+                      <h4 class="rheading">[Note: {{unAvis.reviewScore}}/5] Le {{unAvis.reviewDate |date('d/m/Y')}}, {{unAvis.idUser.login}} a écrit<span></span></h4>
+                      <blockquote>
+                      <p>
+                          <i class="icon-quote-left"></i>{{unAvis.reviewContent}}
+                      </p>
+                      </blockquote>
+                  </div>
+              {% endfor %}
+            {% endif %}
             </div>
         </div>
     </section>

@@ -24,9 +24,9 @@
       </div>
     </section>
     <section id="maincontent">
-    {% for livre in livres%}
+    {% for item in livreEtAuteur %}
       <div class="container">  
-    <h2>{{livre.title}}</h2>
+    <h2>{{item.idBook.title}}</h2>
         <div class="row">
           <div class="span6">
             <!-- start: Accordion -->
@@ -38,7 +38,7 @@
                 </div>
                 <div id="collapseOne">
                   <div class="accordion-inner">
-                    {{livre.summary}}
+                    {{item.idBook.summary}}
                   </div>
                 </div>
               </div>
@@ -49,9 +49,9 @@
                 </div>
                 <div id="collapseTwo">
                   <div class="accordion-inner">
-                    Auteur: {{auteurs[random(0,24)].firstName}} {{auteurs[random(0,24)].lastName}}<br/>
-                    Genre: {{categories[random(0,24)].categoryName}}<br/>
-                    Public: {{audience[random(0,24)].audienceGroup}}<br/>
+                    Auteur: {{item.idAuthor.firstName}} {{item.idAuthor.lastName}}<br/>
+                    Genre: {{categories[random(0,13)].categoryName}}<br/>
+                    Public: {{item.idBook.idAudience.audienceGroup}}<br/>
                     Note moyenne: {{reviews[random(0,24)].reviewScore}}/5
                   </div>
                 </div>
@@ -63,10 +63,11 @@
                 </div>
                 <div id="collapseThree">
                   <div class="accordion-inner">
-                     <a href="{{path('updateProfil', {id: livre.id, status: 'À lire'})}}" class="btn btn-theme"><i class="icon-heart"></i>J'aimerais le lire</a>
-                     <a href="{{path('updateProfil', {id: livre.id, status: 'En cours'})}}" class="btn btn-theme"><i class="icon-star"></i>Je le lis</a>
-                     <a href="{{path('updateProfil', {id: livre.id, status: 'Lu'})}}" class="btn btn-theme"><i class="icon-check"></i>Je l'ai lu</a><br/></br>
-                     <a href="{{path('writeReview', {id: livre.id})}}" class="btn btn-theme btn-large"><i class="icon-edit"></i>Donnez votre avis !</a>
+                     <a href="{{path('updateProfil', {id: item.id, status: 'À lire'})}}" class="btn btn-theme"><i class="icon-heart"></i>J'aimerais le lire</a>
+                     <a href="{{path('updateProfil', {id: item.id, status: 'En cours'})}}" class="btn btn-theme"><i class="icon-star"></i>Je le lis</a>
+                     <a href="{{path('updateProfil', {id: item.id, status: 'Lu'})}}" class="btn btn-theme"><i class="icon-check"></i>Je l'ai lu</a><br/></br>
+                     <a href="{{path('writeReview', {id: item.id})}}" class="btn btn-theme btn-large"><i class="icon-edit"></i>Donnez votre avis !</a>
+                     <br/>(Connectez-vous pour utiliser ces fonctions)
                   </div>
                 </div>
               </div>
@@ -75,9 +76,9 @@
           </div>
           <div class="span6">
             <div class="centered">
-              <img style="box-shadow: 10px 5px 5px lightgrey;" src="{{ asset('assets/img/custo/'~ livre.picture ~'')}}" alt="" /></br>
-              Il y a X avis sur ce livre.</br>
-              <a href="{{path('readReview', {id: livre.id})}}" class="btn btn-theme btn-large"><i class=" icon-align-justify"></i>Lire tous les avis !</a>
+              <img style="box-shadow: 10px 5px 5px lightgrey;" src="{{ asset('assets/img/custo/'~ item.idBook.picture ~'')}}" alt="" /></br>
+              </br>
+              <a href="{{path('readReview', {id: item.id})}}" class="btn btn-theme btn-large"><i class=" icon-align-justify"></i>Lire tous les avis !</a>
             </div>
           </div>
         </div>

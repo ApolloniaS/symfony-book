@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Audience;
-use App\Entity\Author;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Book;
+use App\Entity\BookAuthor;
 use App\Entity\Category;
 use App\Entity\Review;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,33 +19,36 @@ class LivresController extends AbstractController
     {
 
         $em = $this->getDoctrine()->getManager();
-        $repLivre = $em->getRepository(Book::class);
-        $livre = $repLivre->findAll(); 
 
-        $repAuteur = $em->getRepository(Author::class);
-        $auteurs = $repAuteur->findAll(); 
+        $repLivreAuteur = $em->getRepository(BookAuthor::class);
+        $livreAuteur = $repLivreAuteur->findAll(); 
 
         $repGenre = $em->getRepository(Category::class);
         $category = $repGenre->findAll(); 
-
-        $repAudience = $em->getRepository(Audience::class);
-        $audience = $repAudience->findAll();
         
         $repReview = $em->getRepository(Review::class);
         $reviews = $repReview->findAll();
+        
 
-        $vars = ['livres' => $livre,
-                'auteurs' => $auteurs,
+        $vars = ['livreEtAuteur' => $livreAuteur,
                 'categories' => $category,
-                'audience' => $audience,
                 'reviews' => $reviews];
-
+        //TODO: quand la fixture categories fonctionnera, retirer le random
+        //TODO: faire moyenne des scores et enlever le random
+        //dd($vars);
         return $this->render("livres/index.html.twig", $vars);
     }
 
     #[Route('/livres/review/{id}', name: 'writeReview')]
     public function writeReview(Request $req)
     {
+        $currentUser = $this->getUser();
+        if($currentUser == null)
+        {
+            return $this->redirectToRoute('app_login');
+        }
+        else
+        {
         $idLivre = $req->get('id');
 
         $em = $this->getDoctrine()->getManager();
@@ -55,6 +58,7 @@ class LivresController extends AbstractController
         $vars = ['leLivre' => $livre];
 
         return $this->render("livres/review.html.twig", $vars);
+        }
 
     }
 

@@ -19,13 +19,13 @@ class BookCategory
 
     /**
      * @ORM\ManyToOne(targetEntity=Book::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idBook;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCategory;
 

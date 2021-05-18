@@ -17,16 +17,16 @@ class ReviewFixture extends Fixture implements DependentFixtureInterface
     {
 
         $repUser = $manager->getRepository(User::class);
-        $users = $repUser->findOneBy(['id' => rand(0,3)]);
+        $users = $repUser->findAll();
 
         $repoBook = $manager->getRepository(Book::class);
-        $books = $repoBook->findOneBy(['id' => rand(0,25)]);
+        $books = $repoBook->findAll();
 
         $faker = Faker\Factory::create();
         for ($i = 0; $i < 25 ; $i++){
             $book = new Review([
-                'idUser' => $users,
-                'idBook'=> $books,
+                'idUser' => $users[array_rand($users)],
+                'idBook'=> $books[array_rand($books)],
                 'reviewContent' => $faker->realText(200),
                 'reviewScore'=>rand(0,5),
                 'reviewDate'=>$faker->dateTime, 

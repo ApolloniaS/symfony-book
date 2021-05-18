@@ -35,7 +35,14 @@ class ProfilController extends AbstractController
     #[Route('/profil/{id}/{status}', name: 'updateProfil')]
     public function addStatus(Request $req)
     {
-        
+    $currentUser = $this->getUser();
+
+    if($currentUser == null)
+        {
+            return $this->redirectToRoute('app_login');
+        }
+    else
+    {
     $idLivre = $req->get("id");
     $statutLivre = $req->get("status");
 
@@ -59,5 +66,6 @@ class ProfilController extends AbstractController
         $vars = ['infosUserBook' => $ub];
 
     return $this->render('profil/index.html.twig', $vars);
+    }
     }
 }
