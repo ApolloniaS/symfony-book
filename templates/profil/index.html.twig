@@ -50,7 +50,7 @@
                       <p>
                         <strong>Retrouvez ici l'ensemble des livres que vous planifiez de dévorer un jour !</strong></br>
                         {% for item in infosUserBook %}
-                          {% if item.readingStatus == "À lire" %}
+                          {% if app.user.id == item.idUser.id and item.readingStatus == "À lire" %}
                             <i class="icon-angle-right"></i>{{item.idBook.title}}</br>
                           {% endif %}
                         {% endfor %}
@@ -60,7 +60,7 @@
                       <p>
                         <strong>Retrouvez ici les livres que vous lisez actuellement.</strong></br>
                         {% for item in infosUserBook %}
-                          {% if item.readingStatus == "En cours" %}
+                          {% if app.user.id == item.idUser.id and item.readingStatus == "En cours" %}
                             <i class="icon-angle-right"></i>{{item.idBook.title}}</br>
                           {% endif %}
                         {% endfor %}
@@ -70,7 +70,7 @@
                       <p>
                         <strong>Retrouvez ici l'ensemble des livres que vous avez déjà lus.</strong></br>
                         {% for item in infosUserBook %}
-                          {% if item.readingStatus == "Lu" %}
+                          {% if app.user.id == item.idUser.id and item.readingStatus == "Lu" %}
                             <i class="icon-angle-right"></i>{{item.idBook.title}}</br>
                           {% endif %}
                         {% endfor %}

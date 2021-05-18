@@ -52,7 +52,12 @@ class ProfilController extends AbstractController
     $em->persist($userBook);
     $em->flush();
 
+    $em = $this->getDoctrine()->getManager();
+        $rUb = $em->getRepository(UserBook::class);
+        $ub = $rUb->findAll();
     
-    return $this->render('profil/index.html.twig');
+        $vars = ['infosUserBook' => $ub];
+
+    return $this->render('profil/index.html.twig', $vars);
     }
 }

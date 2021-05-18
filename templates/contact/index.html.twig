@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="{{path('home')}}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li>Contact
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+      <div class="container">
+        <div class="row">
+          <div class="span4">
+            <aside>
+              <div class="widget">
+                <h4 class="rheading">Contactez-moi<span></span></h4>
+                <ul>
+                  <li><label><strong>Téléphone : </strong></label>
+                    <p>
+                      042/42.42.42
+                    </p>
+                  </li>
+                  <li><label><strong>Email : </strong></label>
+                    <p>
+                      a.sorella@interface3.be
+                    </p>
+                  </li>
+                  <li><label><strong>Adresse : </strong></label>
+                    <p>
+                      Rue de la bière, 42
+                      1000 Bruxelles 
+                      Belgique
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <div class="widget">
+                <h4 class="rheading">Retrouvez-moi sur<span></span></h4>
+                <ul class="social-links">
+                  <li><a href="https://github.com/ApolloniaS" title="Twitter"><i class="icon-square icon-32 icon-github"></i></a></li>
+                  <li><a href="https://www.linkedin.com/in/apollonia-sorella/" title="Linkedin"><i class="icon-square icon-32 icon-linkedin"></i></a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+          <div class="span8">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80598.70582335847!2d4.305349933842882!3d50.85506246125627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3a4ed73c76867%3A0xc18b3a66787302a7!2sBruxelles!5e0!3m2!1sfr!2sbe!4v1621362438951!5m2!1sfr!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+            <div class="spacer30">
+            </div>
+
+            <div id="sendmessage">Message bien envoyé :)</div>
+            <div id="errormessage"></div>
+            <form action="mailto:a.sorella@interface3.be" method="post" role="form" class="contactForm">
+              <div class="row">
+                <div class="span4 form-group">
+                  <input type="text" name="name" class="input-block-level" id="name" placeholder="Votre nom" data-rule="minlen:2" data-msg="Deux caractères minimum" />
+                  <div class="validation"></div>
+                </div>
+
+                <div class="span4 form-group">
+                  <input type="email" class="input-block-level" name="email" id="email" placeholder="Votre email" data-rule="email" data-msg="Entrez un email valide" />
+                  <div class="validation"></div>
+                </div>
+                <div class="span8 form-group">
+                  <input type="text" class="input-block-level" name="subject" id="subject" placeholder="Sujet" data-rule="minlen:4" data-msg="Nom trop court" />
+                  <div class="validation"></div>
+                </div>
+                <div class="span8 form-group">
+                  <textarea class="input-block-level" name="message" rows="5" data-rule="required" data-msg="Le message ne peut être vide" placeholder="Message"></textarea>
+                  <div class="validation"></div>
+                  <div class="text-center">
+                    <button class="btn btn-theme" type="submit">Envoyer</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

@@ -25,5 +25,19 @@
       </div>
     </section>
     <section id="maincontent">
+        <div class="container">
+            <div class="row">
+            {% for unAvis in avis %}
+                <div class="span6">
+                    <h4 class="rheading">[Note: {{unAvis.reviewScore}}/5] Le {{unAvis.reviewDate |date('d/m/Y')}}, Dao a écrit<span></span></h4>
+                    <blockquote>
+                    <p>
+                        <i class="icon-quote-left"></i>{{unAvis.reviewContent}}
+                    </p>
+                    </blockquote>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
     </section>
 {% endblock %}
