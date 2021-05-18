@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfilController!{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
     <section id="subintro">
@@ -35,24 +35,49 @@
               </div>
               <div class="row">
                 <div class="span8">
-                  <!-- start flexslider -->
-                  <div class="flexslider">
-                    <ul class="slides">
-                      <li>
-                        <img src="assets/img/slides/flexslider/img1.jpg" alt="" />
-                      </li>
-                      <li>
-                        <img src="assets/img/slides/flexslider/img2.jpg" alt="" />
-                      </li>
-                      <li>
-                        <img src="assets/img/slides/flexslider/img3.jpg" alt="" />
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- end flexslider -->
+                  
                   <p>
-                    Cu cum noster euismod appellantur, mundi vitae vim ut, ea sea scripta expetendis vituperatoribus. Et cibo dicat impetus cum, id his quodsi scripserit. Nec purto habeo recteque eu. Posse oportere accusamus an sit, ex quando phaedrum sapientem ius. Perfecto
-                    ocurreret no nam, eu quas cetero qui, vel ea minim nusquam salutatus. Nemore integre his ei, tollit eirmod eam at.
+                  
+                <h4 class="rheading">Vos lectures<span></span></h4>
+                <div class="tabbable tabs-top">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#one" data-toggle="tab"><i class="icon-check-empty"></i>À lire</a></li>
+                    <li><a href="#two" data-toggle="tab"><i class=" icon-bookmark"></i>En cours</a></li>
+                    <li><a href="#three" data-toggle="tab"><i class="icon-check"></i>Lu</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="one">
+                      <p>
+                        <strong>Retrouvez ici l'ensemble des livres que vous planifiez de dévorer un jour !</strong></br>
+                        {% if toAdd is defined and toAdd[1] == "À lire" %}
+                          {{toAdd[0]}}
+                        {% else %}
+                          Vous n'avez encore ajouté aucun livre dans cette section :(
+                        {% endif %}
+                      </p>
+                    </div>
+                    <div class="tab-pane" id="two">
+                      <p>
+                        <strong>Retrouvez ici les livres que vous lisez actuellement.</strong></br>
+                        {% if toAdd is defined and toAdd[1] == "En cours" %}
+                          {{toAdd[0]}}
+                        {% else %}
+                          Vous n'avez encore ajouté aucun livre dans cette section :(
+                        {% endif %}
+                      </p>
+                    </div>
+                    <div class="tab-pane" id="three">
+                      <p>
+                        <strong>Retrouvez ici l'ensemble des livres que vous avez déjà lus.</strong></br>
+                        {% if toAdd is defined and toAdd[1] == "Lu" %}
+                          {{toAdd[0]}}
+                        {% else %}
+                          Vous n'avez encore ajouté aucun livre dans cette section :(
+                        {% endif %}
+                      </p>
+                    </div>
+                  </div>
+                </div>
                   </p>
                 </div>
                 <div class="span4">
@@ -64,8 +89,9 @@
                           <li><label>Nom d'utilisateur :</label> {{app.user.login}}</li>
                           <li><label>Email :</label> {{app.user.email}}</li>
                           <li><label>Date de naissance :</label> {{app.user.birthdate |date('d/m/Y')}}</li>
-                          <li><label>Avatar :</label> Modifier l'avatar</li>
                         </ul>
+                        <br/>
+                        <a href="#">Modifier vos informations</a>
                       </div>
                     </div>
                   </aside>
