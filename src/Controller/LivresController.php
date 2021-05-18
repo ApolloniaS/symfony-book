@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\Review;
+use Symfony\Component\HttpFoundation\Request;
 
 class LivresController extends AbstractController
 {
@@ -41,4 +42,20 @@ class LivresController extends AbstractController
 
         return $this->render("livres/index.html.twig", $vars);
     }
+
+    #[Route('/livres/review/{id}', name: 'writeReview')]
+    public function writeReview(Request $req)
+    {
+        $idLivre = $req->get('id');
+
+        $em = $this->getDoctrine()->getManager();
+        $repLivre = $em->getRepository(Book::class);
+        $livre = $repLivre->findOneBy(['id' => $idLivre]);
+
+        $vars = ['leLivre' => $livre];
+
+        return $this->render("livres/review.html.twig", $vars);
+
+    }
+
 }
