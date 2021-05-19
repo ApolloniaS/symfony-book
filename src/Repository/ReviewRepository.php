@@ -31,6 +31,19 @@ class ReviewRepository extends ServiceEntityRepository
         return $res;
     } 
 
+    public function countReviewsForOneBook($id)
+    {
+        $qb = $this->createQueryBuilder("r");
+        $query = $qb->select('count(r)')
+            ->where('r.idBook = :id')
+            ->setParameters(['id'=> $id])
+            ->orderBy('r.idBook', 'ASC')
+            ->getQuery();
+        $res = $query->getSingleScalarResult();
+
+        return $res;
+    } 
+
     // /**
     //  * @return Review[] Returns an array of Review objects
     //  */

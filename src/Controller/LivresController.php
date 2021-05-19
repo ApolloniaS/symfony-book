@@ -29,10 +29,13 @@ class LivresController extends AbstractController
         $repReview = $em->getRepository(Review::class);
         $reviews = $repReview->findAll();
         
-
+        //$nb = $repReview->countReviewsForOneBook($id);
+        //todo: check moyen de récup l'id du livre
+        
         $vars = ['livreEtAuteur' => $livreAuteur,
                 'categories' => $category,
-                'reviews' => $reviews];
+                'reviews' => $reviews,
+                ];
         //TODO: quand la fixture categories fonctionnera, retirer le random
         //TODO: faire moyenne des scores et enlever le random
         //dd($vars);

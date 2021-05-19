@@ -84,7 +84,7 @@ class ProfilController extends AbstractController
         $firstName = $req->request->get('firstName');
         $lastName = $req->request->get('lastName');
         $email = $req->request->get('email');
-        $birthday = $req->request->get('birthdate');
+        $birthday = new \DateTime($req->request->get('birthdate'));
         //dd([$user, $login, $firstName, $lastName, $email, $birthday]);
 
         $em = $this->getDoctrine()->getManager();
@@ -95,8 +95,7 @@ class ProfilController extends AbstractController
         $userToChange->setFirstName($firstName);
         $userToChange->setLastName($lastName);
         $userToChange->setEmail($email);
-        //$userToChange->setBirthdate($birthday);
-        //todo: check prob de typage
+        $userToChange->setBirthdate($birthday);
         $em->flush();
         
         return $this->redirectToRoute('profil');
