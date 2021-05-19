@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Audience;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,18 +9,27 @@ use App\Entity\Book;
 use App\Entity\BookAuthor;
 use App\Entity\Category;
 use App\Entity\Review;
+use ContainerCOgeNVI\PaginatorInterface_82dac15;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class LivresController extends AbstractController
 {
     #[Route('/livres', name: 'livres')]
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $req): Response
     {
 
         $em = $this->getDoctrine()->getManager();
 
         $repLivreAuteur = $em->getRepository(BookAuthor::class);
         $livreAuteur = $repLivreAuteur->findAll(); 
+
+        $numeroPage = $req->query->getInt('page', 1);
+        $paginationLivres = $paginator->paginate(
+            $livreAuteur,
+            $numeroPage,
+            5 // résultats affichés par page
+        );
 
         $repGenre = $em->getRepository(Category::class);
         $category = $repGenre->findAll(); 
@@ -35,7 +43,7 @@ class LivresController extends AbstractController
         $vars = ['livreEtAuteur' => $livreAuteur,
                 'categories' => $category,
                 'reviews' => $reviews,
-                ];
+                'paginationLivres' => $paginationLivres];
         //TODO: quand la fixture categories fonctionnera, retirer le random
         //TODO: faire moyenne des scores et enlever le random
         //dd($vars);
