@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher...{% endblock %}
+
+{% block body %}
+<section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="{{path('home')}}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li>Livres
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                {{ form_start(form,{'action': path('results'), 'method': 'GET'}) }}
+                <button class="btn btn-dark" type="submit">Rechercher par...</button>
+                {{ form_end(form) }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+      <div class="container">  
+        <div id="contenuRecherche">
+            <h1>Résultat de votre recherche</h1>
+            (Cette fonctionnalité est encore en construction...)
+            <div class="bg-light">
+            {% if(livresFiltre | length > 0) %} 
+                {% for livre in livresFiltre %} 
+                <br>
+                <ul>
+                <h5><li>{{ livre.title }} </li></h5> 
+                </ul>
+                {% endfor %}
+            {% else %}
+                <h3 class="text-danger">Pas de résultats...</h3>
+            {% endif %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

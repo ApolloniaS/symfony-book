@@ -9,9 +9,12 @@ use App\Entity\Book;
 use App\Entity\BookAuthor;
 use App\Entity\Category;
 use App\Entity\Review;
-use ContainerCOgeNVI\PaginatorInterface_82dac15;
+use App\Repository\BookRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Data\SearchData;
+use App\Form\SearchType;
+
 
 class LivresController extends AbstractController
 {
@@ -23,7 +26,7 @@ class LivresController extends AbstractController
 
         $repLivreAuteur = $em->getRepository(BookAuthor::class);
         $livreAuteur = $repLivreAuteur->findAll(); 
-
+        //partie qui gère la pagination
         $numeroPage = $req->query->getInt('page', 1);
         $paginationLivres = $paginator->paginate(
             $livreAuteur,
@@ -40,10 +43,12 @@ class LivresController extends AbstractController
         //$nb = $repReview->countReviewsForOneBook($id);
         //todo: check moyen de récup l'id du livre
         
+        
         $vars = ['livreEtAuteur' => $livreAuteur,
                 'categories' => $category,
                 'reviews' => $reviews,
-                'paginationLivres' => $paginationLivres];
+                'paginationLivres' => $paginationLivres,
+                ];
         //TODO: quand la fixture categories fonctionnera, retirer le random
         //TODO: faire moyenne des scores et enlever le random
         //dd($vars);
@@ -118,6 +123,30 @@ class LivresController extends AbstractController
 
         return $this->render("livres/allreviews.html.twig", $vars);
     
+    }
+
+    #[Route('/livres/results', name: 'results')]
+    public function getResults(BookRepository $bookrep, Request $req): Response
+    {
+        //test filtre
+        $data = new SearchData(); 
+        $form = $this->createForm(
+            SearchType::class,
+            $data
+        );
+        $form->handleRequest($req);
+        $livresfiltre = [];
+        if ($form->isSubmitted()) {
+            
+            $livresfiltre = $bookrep->obtenirResultatsFiltres($data);
+        } else {
+            $livresfiltre = $bookrep->obtenirResultatsFiltres($data);
+        }
+        
+        $vars = ['livresFiltre' => $livresfiltre,
+                'form' => $form->createView()];
+
+        return $this->render("livres/resultats.html.twig", $vars);
     }
 
 }
